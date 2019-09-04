@@ -17,43 +17,43 @@ import br.com.learnmotion.services.TesteService;
 @RequestMapping("/app/v1/teste")
 public class TesteController {
 
-	@Autowired
-	private TesteService testeService;
-
-	@RequestMapping(value = "/pessoa", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-	@ResponseBody
-	public ResponseEntity<?> buscaPessoas() {
-		return testeService.buscaTodasPessoas();
-	}
-
-	@RequestMapping(value = "/pessoa/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-	@ResponseBody
-	public ResponseEntity<?> buscaPessoa(@RequestParam(required = true) Long id) {
-		return testeService.buscaUmaPessoa(id);
-	}
-
-	@RequestMapping(value = "/pessoa", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-	@ResponseBody
-	public ResponseEntity<?> cadastraPessoa(@RequestBody PessoaDto pessoa) {
-		return testeService.cadastraUmaPessoa(pessoa);
-	}
-
-	@RequestMapping(value = "/pessoa", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-	@ResponseBody
-	public ResponseEntity<?> alterarPessoa() {
-		return null;
-	}
-
-	@RequestMapping(value = "/pessoa/{id}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-	@ResponseBody
-	public ResponseEntity<?> deletarPessoa() {
-		return null;
-	}
-
-	@RequestMapping(value = "/pessoa", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-	@ResponseBody
-	public ResponseEntity<?> deletarPessoas() {
-		return null;
-	}
+//	@Autowired
+//	private TesteService testeService;
+//
+//	@RequestMapping(value = "/pessoa", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+//	@ResponseBody
+//	public ResponseEntity<?> buscaPessoas() {
+//		return testeService.buscaTodasPessoas();
+//	}
+//
+//	@RequestMapping(value = "/pessoa/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+//	@ResponseBody
+//	public ResponseEntity<?> buscaPessoa(@RequestParam(required = true) Long id) {
+//		return testeService.buscaUmaPessoa(id);
+//	}
+//
+//	@RequestMapping(value = "/pessoa", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+//	@ResponseBody
+//	public ResponseEntity<?> cadastraPessoa(@RequestBody PessoaDto pessoa) {
+//		return testeService.cadastraUmaPessoa(pessoa);
+//	}
+//
+//	@RequestMapping(value = "/pessoa", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+//	@ResponseBody
+//	public ResponseEntity<?> alterarPessoa() {
+//		return null;
+//	}
+//
+//	@RequestMapping(value = "/pessoa/{id}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+//	@ResponseBody
+//	public ResponseEntity<?> deletarPessoa() {
+//		return null;
+//	}
+//
+//	@RequestMapping(value = "/pessoa", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+//	@ResponseBody
+//	public ResponseEntity<?> deletarPessoas() {
+//		return null;
+//	}
 
 }

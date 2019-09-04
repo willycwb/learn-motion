@@ -1,56 +1,50 @@
 package br.com.learnmotion.models;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 import lombok.Data;
 
 @Entity
-@Table(name = "PESSOA")
+@Table(name = "NIVEL")
 @Data
 public class Nivel {
 
 	@Id
 	@NotNull
-	@Column(name = "PESSOA_ID")
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "ID_NIVEL")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
+	// TODO - SHOW
+	// criar tipoNivel
 
 	@NotNull
-	@Column(name = "NOME")
-	private String nome;
+	@Column(name = "TITULO")
+	private String titulo;
 
 	@NotNull
-	@Column(name = "IDADE")
-	private Long idade;
+	@Column(name = "SUB_TITULO")
+	private String subTitulo;
 
-	public Long getId() {
-		return id;
-	}
+	@NotNull
+	@Column(name = "DESCRICAO")
+	private String descricao;
 
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getNome() {
-		return nome;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-
-	public Long getIdade() {
-		return idade;
-	}
-
-	public void setIdade(Long idade) {
-		this.idade = idade;
-	}
+	@Lob
+	@NotNull
+	@Column(name = "BACKGROUD", columnDefinition = "BLOB")
+	private byte[] backgroud;
+	
+	// TODO - SHOW
+	private List<Conteudo> conteudos;
 
 }
