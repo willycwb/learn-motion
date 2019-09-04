@@ -1,12 +1,12 @@
 package br.com.learnmotion.models.dtos;
 
-import br.com.learnmotion.models.tipoconteudo;
+import br.com.learnmotion.models.TipoConteudo;
 
 public class SubConteudoDto {
 	
 	private Long id;
 	
-	private tipoconteudo sub_conteudo;
+	private TipoConteudo sub_conteudo;
 	
 	private String valorStringMaior;
 	
@@ -26,11 +26,11 @@ public class SubConteudoDto {
 		this.id = id;
 	}
 
-	public tipoconteudo getSub_conteudo() {
+	public TipoConteudo getSub_conteudo() {
 		return sub_conteudo;
 	}
 
-	public void setSub_conteudo(tipoconteudo sub_conteudo) {
+	public void setSub_conteudo(TipoConteudo sub_conteudo) {
 		this.sub_conteudo = sub_conteudo;
 	}
 

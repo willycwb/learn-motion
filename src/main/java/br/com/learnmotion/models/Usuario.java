@@ -13,7 +13,7 @@ import lombok.Data;
 @Entity
 @Table(name = "USUARIO")
 @Data
-public class Usuario {
+public class Usuario extends Parent {
 
 	@Id
 	@NotNull

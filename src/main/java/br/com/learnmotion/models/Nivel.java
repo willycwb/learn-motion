@@ -2,27 +2,34 @@ package br.com.learnmotion.models;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
-import lombok.Data;
-
 @Entity
 @Table(name = "NIVEL")
-@Data
-public class Nivel {
+public class Nivel extends Parent {
 
 	@Id
 	@NotNull
 	@Column(name = "ID_NIVEL")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+
+	@NotNull
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "TIPO_NIVEL")
+	private TipoNivel tipoNivel;
 
 	@NotNull
 	@Column(name = "TITULO")
@@ -40,9 +47,9 @@ public class Nivel {
 	@NotNull
 	@Column(name = "BACKGROUD", columnDefinition = "BLOB")
 	private byte[] backgroud;
-	
-	// TODO - SHOW
-//	private List<Conteudo> conteudos;
+
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "nivel", fetch = FetchType.LAZY)
+	private List<Conteudo> conteudos;
 
 	public Long getId() {
 		return id;
@@ -50,6 +57,14 @@ public class Nivel {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public TipoNivel getTipoNivel() {
+		return tipoNivel;
+	}
+
+	public void setTipoNivel(TipoNivel tipoNivel) {
+		this.tipoNivel = tipoNivel;
 	}
 
 	public String getTitulo() {
@@ -82,6 +97,14 @@ public class Nivel {
 
 	public void setBackgroud(byte[] backgroud) {
 		this.backgroud = backgroud;
+	}
+
+	public List<Conteudo> getConteudos() {
+		return conteudos;
+	}
+
+	public void setConteudos(List<Conteudo> conteudos) {
+		this.conteudos = conteudos;
 	}
 
 }

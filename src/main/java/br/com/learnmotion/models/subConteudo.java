@@ -13,16 +13,10 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import lombok.Data;
-
 @Entity
 @Table(name = "SUB_CONTEUDO")
-@Data
-public class subConteudo {
+public class SubConteudo extends Parent {
 
-	// TODO - SHow
-	// alterar nome para subConteudo e alterar tipo para tipoconteudo
-	
 	@Id
 	@NotNull
 	@Column(name = "ID_SUB_CONTEUDO")
@@ -31,8 +25,8 @@ public class subConteudo {
 
 	@NotNull
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "SUB_CONTEUDO")
-	private tipoconteudo sub_conteudo;
+	@JoinColumn(name = "ID_TIPO_CONTEUDO")
+	private TipoConteudo tipoConteudo;
 
 	@NotNull
 	@Size(max = 50)
@@ -67,12 +61,12 @@ public class subConteudo {
 		this.id = id;
 	}
 
-	public tipoconteudo getSub_conteudo() {
-		return sub_conteudo;
+	public TipoConteudo getTipoConteudo() {
+		return tipoConteudo;
 	}
 
-	public void setSub_conteudo(tipoconteudo sub_conteudo) {
-		this.sub_conteudo = sub_conteudo;
+	public void setTipoConteudo(TipoConteudo tipoConteudo) {
+		this.tipoConteudo = tipoConteudo;
 	}
 
 	public String getValorStringMaior() {
@@ -115,5 +109,4 @@ public class subConteudo {
 		this.valorBlobExemplo = valorBlobExemplo;
 	}
 
-	
 }

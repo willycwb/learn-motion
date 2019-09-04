@@ -1,15 +1,17 @@
 package br.com.learnmotion.models.dtos;
 
 public class NivelDto {
-	
+
 	private Long id;
-	
+
+	private TipoNivelDto tipoNivel;
+
 	private String titulo;
-	
+
 	private String subTitulo;
-	
+
 	private String descricao;
-	
+
 	private byte[] backgroud;
 
 	public Long getId() {
@@ -18,6 +20,14 @@ public class NivelDto {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public TipoNivelDto getTipoNivel() {
+		return tipoNivel;
+	}
+
+	public void setTipoNivel(TipoNivelDto tipoNivel) {
+		this.tipoNivel = tipoNivel;
 	}
 
 	public String getTitulo() {
@@ -51,7 +61,5 @@ public class NivelDto {
 	public void setBackgroud(byte[] backgroud) {
 		this.backgroud = backgroud;
 	}
-	
-	
 
 }

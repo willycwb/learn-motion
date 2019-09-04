@@ -35,9 +35,9 @@ public class Conteudo extends Parent {
 	private Nivel nivel;
 
 	@ManyToMany
-	@JoinTable(name = "CONTEUDO_TIPO_CONTEUDO", joinColumns = {
-			@JoinColumn(name = "ID_CONTEUDO") }, inverseJoinColumns = { @JoinColumn(name = "ID_TIPO_CONTEUDO") })
-	private Set<subConteudo> conteudos = new HashSet<>();
+	@JoinTable(name = "CONTEUDO_SUB_CONTEUDO", joinColumns = {
+			@JoinColumn(name = "ID_CONTEUDO") }, inverseJoinColumns = { @JoinColumn(name = "ID_SUB_CONTEUDO") })
+	private Set<SubConteudo> subConteudos = new HashSet<>();
 
 	public Long getId() {
 		return id;
@@ -55,14 +55,12 @@ public class Conteudo extends Parent {
 		this.nivel = nivel;
 	}
 
-	public Set<subConteudo> getConteudos() {
-		return conteudos;
+	public Set<SubConteudo> getSubConteudos() {
+		return subConteudos;
 	}
 
-	public void setConteudos(Set<subConteudo> conteudos) {
-		this.conteudos = conteudos;
+	public void setSubConteudos(Set<SubConteudo> subConteudos) {
+		this.subConteudos = subConteudos;
 	}
-	
-	
 
 }

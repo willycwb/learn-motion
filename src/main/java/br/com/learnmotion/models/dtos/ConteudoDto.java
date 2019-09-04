@@ -3,7 +3,7 @@ package br.com.learnmotion.models.dtos;
 import java.util.Set;
 
 import br.com.learnmotion.models.Nivel;
-import br.com.learnmotion.models.subConteudo;
+import br.com.learnmotion.models.SubConteudo;
 
 public class ConteudoDto {
 	
@@ -11,7 +11,7 @@ public class ConteudoDto {
 	
 	private Nivel nivel;
 	
-	private Set<subConteudo> conteudos;
+	private Set<SubConteudo> conteudos;
 
 	public Long getId() {
 		return id;
@@ -29,11 +29,11 @@ public class ConteudoDto {
 		this.nivel = nivel;
 	}
 
-	public Set<subConteudo> getConteudos() {
+	public Set<SubConteudo> getConteudos() {
 		return conteudos;
 	}
 
-	public void setConteudos(Set<subConteudo> conteudos) {
+	public void setConteudos(Set<SubConteudo> conteudos) {
 		this.conteudos = conteudos;
 	}
 	
