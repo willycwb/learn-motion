@@ -5,8 +5,10 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import br.com.learnmotion.models.Nivel;
 import br.com.learnmotion.models.dtos.NivelDto;
@@ -22,69 +24,100 @@ public class NivelService extends ParentService {
 		return nivelRepository.findAll();
 	}
 
-//	private Pessoa buscaPessoa(Long id) {
-//		return testeRepository.findById(id).get();
-//	}
-//
-//	@Transactional
-//	private Pessoa cadastrarPessoa(PessoaDto pessoaDto) {
-//		Pessoa pessoa = new Pessoa();
-//		pessoa.setNome(pessoaDto.getNome());
-//		pessoa.setIdade(pessoaDto.getIdade());
-//		pessoa = testeRepository.save(pessoa);
-//		return pessoa;
-//	}
-//
-//	@Modifying
-//	private Pessoa alterarPessoa(PessoaDto pessoaDto) {
-//		Pessoa pessoa = buscaPessoa(pessoaDto.getId());
-//		pessoa.setNome(pessoaDto.getNome());
-//		pessoa.setIdade(pessoaDto.getIdade());
-//		pessoa = testeRepository.save(pessoa);
-//		return pessoa;
-//	}
-//
-//	@Transactional
-//	private void deletarPessoa(Long id) {
-//		Pessoa pessoa = buscaPessoa(id);
-//		testeRepository.delete(pessoa);
-//	}
-//
-//	@Transactional
-//	private void deletarPessoas() {
-//		testeRepository.deleteAll();
-//	}
+	private Nivel buscaNivel(Long id) {
+		return nivelRepository.findById(id).get();
+	}
 
-	public ResponseEntity<?> buscaTodasPessoas() {
-		List<Nivel> pessoas = buscaNiveis();
+	@Transactional
+	private Nivel cadastrarNivel(NivelDto nivelDto) {
+		Nivel nivel = new Nivel();
+		//nivel.setTipoNivel(nivelDto.getTipoNivel());
+		nivel.setTitulo(nivelDto.getTitulo());
+		nivel.setSubTitulo(nivelDto.getSubTitulo());
+		nivel.setDescricao(nivelDto.getDescricao());
+		nivel.setBackgroud(nivelDto.getBackgroud());
+		nivel = nivelRepository.save(nivel);
+		return nivel;
+	}
 
-		if (pessoas == null) {
+	@Modifying
+	private Nivel alterarNivel(NivelDto nivelDto) {
+		Nivel nivel = buscaNivel(nivelDto.getId());
+		//nivel.setTipoNivel(nivelDto.getTipoNivel());
+		nivel.setTitulo(nivelDto.getTitulo());
+		nivel.setSubTitulo(nivelDto.getSubTitulo());
+		nivel.setDescricao(nivelDto.getDescricao());
+		nivel.setBackgroud(nivelDto.getBackgroud());
+		nivel = nivelRepository.save(nivel);
+		return nivel;
+	}
+
+	@Transactional
+	private Nivel deletarNivel(Long id) {
+		Nivel nivel = buscaNivel(id);
+		nivelRepository.delete(nivel);		
+		return nivel;
+	}
+
+	@Transactional
+	private void deletarNiveis() {
+		nivelRepository.deleteAll();
+	}
+
+	public ResponseEntity<?> buscaTodosNiveis() {
+		List<Nivel> niveis = buscaNiveis();
+
+		if (niveis == null) {
 			return ResponseEntity.noContent().build();
 		}
 
-		List<NivelDto> pessoasDto = pessoas.stream().map(item -> mapper.map(item, NivelDto.class))
+		List<NivelDto> nivelDto = niveis.stream().map(item -> mapper.map(item, NivelDto.class))
 				.collect(Collectors.toList());
 
-		return ResponseEntity.ok(Map.of("result", pessoasDto));
+		return ResponseEntity.ok(Map.of("result", nivelDto));
 
 	}
 
-//	public ResponseEntity<?> buscaUmaPessoa(Long id) {
-//		Pessoa pessoa = buscaPessoa(id);
-//
-//		if (pessoa != null) {
-//			return ResponseEntity.noContent().build();
-//		}
-//
-//		PessoaDto pessoaDto = mapper.map(pessoa, PessoaDto.class);
-//
-//		return ResponseEntity.ok(Map.of("result", pessoaDto));
-//	}
-//
-//	public ResponseEntity<?> cadastraUmaPessoa(PessoaDto pessoaDto) {
-//		Pessoa pessoa = cadastrarPessoa(pessoaDto);
-//		PessoaDto pessoaresponse = mapper.map(pessoa, PessoaDto.class);
-//		return ResponseEntity.ok(Map.of("result", pessoaresponse));
-//	}
+	public ResponseEntity<?> buscaUmNivel(Long id) {
+		Nivel nivel = buscaNivel(id);
+
+		if (nivel != null) {
+			return ResponseEntity.noContent().build();
+		}
+
+		NivelDto nivelDto = mapper.map(nivel,NivelDto.class);
+
+		return ResponseEntity.ok(Map.of("result", nivelDto));
+	}
+
+	public ResponseEntity<?> cadastraUmNivel(NivelDto nivelDto) {
+		Nivel nivel = cadastrarNivel(nivelDto);
+		NivelDto nivelResponse = mapper.map(nivel, NivelDto.class);
+		return ResponseEntity.ok(Map.of("result", nivelResponse));
+	}
+	
+    public ResponseEntity<?> alteraNivel(NivelDto nivelDto){
+		Nivel nivel = alterarNivel(nivelDto);
+		NivelDto nivelResponse = mapper.map(nivel, NivelDto.class);	
+    	return ResponseEntity.ok(Map.of("result", nivelResponse));
+	}
+    
+    public ResponseEntity<?> deletaNivel(String id){
+    	Nivel nivel = deletarNivel(Long.valueOf(id));
+    	
+    	if(nivel == null) {
+    		return ResponseEntity.noContent().build();
+    	}
+    	
+    	NivelDto nivelDto = mapper.map(nivel, NivelDto.class);
+    	
+    	return ResponseEntity.ok(Map.of("result", nivelDto));
+    	
+    }
+    
+    public ResponseEntity<?> deletaNiveis(){
+    	deletarNiveis();
+    	return null;
+    }
 
 }
