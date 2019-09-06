@@ -14,9 +14,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.learnmotion.config.JwtTokenUtil;
-import br.com.learnmotion.models.JwtRequest;
-import br.com.learnmotion.models.JwtResponse;
-import br.com.learnmotion.models.UserDTO;
+import br.com.learnmotion.models.dtos.JwtRequest;
+import br.com.learnmotion.models.dtos.JwtResponse;
+import br.com.learnmotion.models.dtos.UsuarioDto;
 import br.com.learnmotion.services.oauth.JwtUserDetailsService;
 
 @RestController
@@ -32,26 +32,26 @@ public class JwtAuthenticationController {
 	@Autowired
 	private JwtUserDetailsService userDetailsService;
 
-	@RequestMapping(value = "/authenticate", method = RequestMethod.POST)
+	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtRequest authenticationRequest) throws Exception {
 
-		authenticate(authenticationRequest.getUsername(), authenticationRequest.getPassword());
+		authenticate(authenticationRequest.getEmail(), authenticationRequest.getSenha());
 
-		final UserDetails userDetails = userDetailsService.loadUserByUsername(authenticationRequest.getUsername());
+		final UserDetails userDetails = userDetailsService.loadUserByUsername(authenticationRequest.getEmail());
 
 		final String token = jwtTokenUtil.generateToken(userDetails);
 
 		return ResponseEntity.ok(new JwtResponse(token));
 	}
-
-	@RequestMapping(value = "/register", method = RequestMethod.POST)
-	public ResponseEntity<?> saveUser(@RequestBody UserDTO user) throws Exception {
-		return ResponseEntity.ok(userDetailsService.save(user));
+	
+	@RequestMapping(value = "/cadastrar", method = RequestMethod.POST)
+	public ResponseEntity<?> saveUser(@RequestBody UsuarioDto usuario) throws Exception {
+		return ResponseEntity.ok(userDetailsService.save(usuario));
 	}
 
-	private void authenticate(String username, String password) throws Exception {
+	private void authenticate(String email, String senha) throws Exception {
 		try {
-			authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
+			authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(email, senha));
 		} catch (DisabledException e) {
 			throw new Exception("USER_DISABLED", e);
 		} catch (BadCredentialsException e) {

@@ -16,7 +16,6 @@ import lombok.Data;
 public class Usuario extends Parent {
 
 	@Id
-	@NotNull
 	@Column(name = "ID_USUARIO")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -33,7 +32,6 @@ public class Usuario extends Parent {
 	@Column(name = "SENHA")
 	private String senha;
 
-	@NotNull
 	@Column(name = "TOKEN")
 	private String token;
 

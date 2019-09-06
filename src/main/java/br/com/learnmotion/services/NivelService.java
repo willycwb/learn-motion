@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.com.learnmotion.models.Nivel;
+import br.com.learnmotion.models.TipoNivel;
 import br.com.learnmotion.models.dtos.NivelDto;
 import br.com.learnmotion.repositories.NivelRepository;
 
@@ -19,6 +20,9 @@ public class NivelService extends ParentService {
 
 	@Autowired
 	private NivelRepository nivelRepository;
+	
+	@Autowired
+	private TipoNivelService tipoNivelService;
 
 	private List<Nivel> buscaNiveis() {
 		return nivelRepository.findAll();
@@ -31,7 +35,8 @@ public class NivelService extends ParentService {
 	@Transactional
 	private Nivel cadastrarNivel(NivelDto nivelDto) {
 		Nivel nivel = new Nivel();
-		//nivel.setTipoNivel(nivelDto.getTipoNivel());
+		TipoNivel tipoNivel = tipoNivelService.buscaNivel(nivelDto.getTipoNivel().getId());
+		nivel.setTipoNivel(tipoNivel);
 		nivel.setTitulo(nivelDto.getTitulo());
 		nivel.setSubTitulo(nivelDto.getSubTitulo());
 		nivel.setDescricao(nivelDto.getDescricao());
@@ -43,7 +48,8 @@ public class NivelService extends ParentService {
 	@Modifying
 	private Nivel alterarNivel(NivelDto nivelDto) {
 		Nivel nivel = buscaNivel(nivelDto.getId());
-		//nivel.setTipoNivel(nivelDto.getTipoNivel());
+		TipoNivel tipoNivel = tipoNivelService.buscaNivel(nivelDto.getTipoNivel().getId());
+		nivel.setTipoNivel(tipoNivel);
 		nivel.setTitulo(nivelDto.getTitulo());
 		nivel.setSubTitulo(nivelDto.getSubTitulo());
 		nivel.setDescricao(nivelDto.getDescricao());
