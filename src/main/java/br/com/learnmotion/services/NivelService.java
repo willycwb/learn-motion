@@ -28,14 +28,18 @@ public class NivelService extends ParentService {
 		return nivelRepository.findAll();
 	}
 
-	private Nivel buscaNivel(Long id) {
+	private Nivel findNivel(Long id) {
 		return nivelRepository.findById(id).get();
+	}
+	
+	public Nivel buscaNivel(Long id) {
+		return findNivel(id);
 	}
 
 	@Transactional
 	private Nivel cadastrarNivel(NivelDto nivelDto) {
 		Nivel nivel = new Nivel();
-		TipoNivel tipoNivel = tipoNivelService.buscaNivel(nivelDto.getTipoNivel().getId());
+		TipoNivel tipoNivel = tipoNivelService.buscaTipoNivel(nivelDto.getTipoNivel().getId());
 		nivel.setTipoNivel(tipoNivel);
 		nivel.setTitulo(nivelDto.getTitulo());
 		nivel.setSubTitulo(nivelDto.getSubTitulo());
@@ -47,8 +51,8 @@ public class NivelService extends ParentService {
 
 	@Modifying
 	private Nivel alterarNivel(NivelDto nivelDto) {
-		Nivel nivel = buscaNivel(nivelDto.getId());
-		TipoNivel tipoNivel = tipoNivelService.buscaNivel(nivelDto.getTipoNivel().getId());
+		Nivel nivel = findNivel(nivelDto.getId());
+		TipoNivel tipoNivel = tipoNivelService.buscaTipoNivel(nivelDto.getTipoNivel().getId());
 		nivel.setTipoNivel(tipoNivel);
 		nivel.setTitulo(nivelDto.getTitulo());
 		nivel.setSubTitulo(nivelDto.getSubTitulo());
@@ -60,7 +64,7 @@ public class NivelService extends ParentService {
 
 	@Transactional
 	private Nivel deletarNivel(Long id) {
-		Nivel nivel = buscaNivel(id);
+		Nivel nivel = findNivel(id);
 		nivelRepository.delete(nivel);		
 		return nivel;
 	}
@@ -85,7 +89,7 @@ public class NivelService extends ParentService {
 	}
 
 	public ResponseEntity<?> buscaUmNivel(Long id) {
-		Nivel nivel = buscaNivel(id);
+		Nivel nivel = findNivel(id);
 
 		if (nivel != null) {
 			return ResponseEntity.noContent().build();
