@@ -7,12 +7,14 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.com.learnmotion.models.TipoConteudo;
 import br.com.learnmotion.models.dtos.TipoConteudoDto;
 import br.com.learnmotion.repositories.TipoConteudoRepository;
 
+@Service
 public class TipoConteudoService extends ParentService {
 
 	@Autowired
@@ -74,8 +76,8 @@ public class TipoConteudoService extends ParentService {
 
 	}
 
-	public ResponseEntity<?> buscaUmTipoConteudo(Long id) {
-		TipoConteudo tipoConteudo = findTipoConteudo(id);
+	public ResponseEntity<?> buscaUmTipoConteudo(String id) {
+		TipoConteudo tipoConteudo = buscaTipoConteudo(Long.valueOf(id));
 
 		if (tipoConteudo != null) {
 			return ResponseEntity.noContent().build();

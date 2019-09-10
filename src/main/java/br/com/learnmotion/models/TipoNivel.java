@@ -13,7 +13,6 @@ import javax.validation.constraints.NotNull;
 public class TipoNivel extends Parent {
 
 	@Id
-	@NotNull
 	@Column(name = "ID_TIPO_NIVEL")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;

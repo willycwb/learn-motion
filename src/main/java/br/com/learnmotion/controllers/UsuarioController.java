@@ -15,7 +15,7 @@ import br.com.learnmotion.models.dtos.UsuarioDto;
 import br.com.learnmotion.services.UsuarioService;
 
 @RestController
-@RequestMapping("/app/v1/util")
+@RequestMapping("/app/v1/usuario")
 public class UsuarioController {
 
 	@Autowired

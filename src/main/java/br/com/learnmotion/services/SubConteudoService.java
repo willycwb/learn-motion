@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.com.learnmotion.models.SubConteudo;
@@ -14,6 +15,7 @@ import br.com.learnmotion.models.TipoConteudo;
 import br.com.learnmotion.models.dtos.SubConteudoDto;
 import br.com.learnmotion.repositories.SubConteudoRepository;
 
+@Service
 public class SubConteudoService extends ParentService {
 
 	@Autowired
@@ -37,7 +39,7 @@ public class SubConteudoService extends ParentService {
 	@Transactional
 	private SubConteudo cadastrarSubConteudo(SubConteudoDto subConteudoDto) {
 		SubConteudo subConteudo = new SubConteudo();
-		TipoConteudo tipoConteudo = tipoConteudoService.buscaTipoConteudo(subConteudoDto.getSub_conteudo().getId());
+		TipoConteudo tipoConteudo = tipoConteudoService.buscaTipoConteudo(subConteudoDto.getTipoConteudo().getId());
 		subConteudo.setTipoConteudo(tipoConteudo);
 		subConteudo.setValorStringMaior(subConteudoDto.getValorStringMaior());
 		subConteudo.setValorStringMedio(subConteudoDto.getValorStringMedio());
@@ -51,7 +53,7 @@ public class SubConteudoService extends ParentService {
 	@Modifying
 	private SubConteudo alterarSubConteudo(SubConteudoDto subConteudoDto) {
 		SubConteudo subConteudo = findSubConteudo(subConteudoDto.getId());
-		TipoConteudo tipoConteudo = tipoConteudoService.buscaTipoConteudo(subConteudoDto.getSub_conteudo().getId());
+		TipoConteudo tipoConteudo = tipoConteudoService.buscaTipoConteudo(subConteudoDto.getTipoConteudo().getId());
 		subConteudo.setTipoConteudo(tipoConteudo);
 		subConteudo.setValorStringMaior(subConteudoDto.getValorStringMaior());
 		subConteudo.setValorStringMedio(subConteudoDto.getValorStringMedio());

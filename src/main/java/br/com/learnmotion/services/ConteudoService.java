@@ -26,10 +26,7 @@ public class ConteudoService extends ParentService {
 
 	@Autowired
 	private NivelService nivelService;
-
-	@Autowired
-	private SubConteudoService subConteudoService;
-
+	
 	private List<Conteudo> findConteudos() {
 		return conteudoRepository.findAll();
 	}
@@ -59,12 +56,15 @@ public class ConteudoService extends ParentService {
 
 	@Modifying
 	private Conteudo alterarConteudo(ConteudoDto conteudoDto) {
-		Conteudo conteudo = new Conteudo();
+		Conteudo conteudo = findConteudo(conteudoDto.getId());
 		Nivel nivel = nivelService.buscaNivel(conteudoDto.getNivel().getId());
-		// SubConteudo subConteudo =
-		// subConteudoService.searchSubConteudo(conteudoDto.getConteudos());
 		conteudo.setNivel(nivel);
-		// conteudo.setSubConteudos(subConteudo);
+		List<SubConteudo> listaSub = new ArrayList<>();
+		conteudoDto.getConteudos().stream().forEach(sub -> {
+			SubConteudo subConteudo = mapper.map(sub, SubConteudo.class);
+			listaSub.add(subConteudo);
+		});
+		conteudo.setSubConteudos(new TreeSet<SubConteudo>(listaSub));
 		conteudo = conteudoRepository.save(conteudo);
 		return conteudo;
 	}

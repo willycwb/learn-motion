@@ -15,7 +15,7 @@ import br.com.learnmotion.models.dtos.SubConteudoDto;
 import br.com.learnmotion.services.SubConteudoService;
 
 @RestController
-@RequestMapping("/app/v1/util")
+@RequestMapping("/app/v1/subconteudo")
 public class SubConteudoController {
 
 	@Autowired

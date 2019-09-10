@@ -15,43 +15,43 @@ import br.com.learnmotion.models.dtos.TipoConteudoDto;
 import br.com.learnmotion.services.TipoConteudoService;
 
 @RestController
-@RequestMapping("/app/v1/util")
+@RequestMapping("/app/v1/tipoconteudo")
 public class TipoConteudoController {
 
 	@Autowired
 	private TipoConteudoService tipoConteudoService;
 
-	@RequestMapping(value = "/tipoConteudo", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@RequestMapping(value = "/tipoconteudo", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	@ResponseBody
 	public ResponseEntity<?> buscaTipoConteudos() {
 		return tipoConteudoService.buscaTodosTiposConteudos();
 	}
 
-	@RequestMapping(value = "/tipoConteudo/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@RequestMapping(value = "/tipoconteudo/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	@ResponseBody
-	public ResponseEntity<?> buscaTipoConteudo(@RequestParam(required = true) Long id) {
-		return tipoConteudoService.buscaUmTipoConteudo(id);
+	public ResponseEntity<?> buscaTipoConteudo(@PathVariable(required = true) String id) {
+		return tipoConteudoService.buscaUmTipoConteudo(id); // Esse nao deu certo no postman
 	}
 
-	@RequestMapping(value = "/tipoConteudo", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@RequestMapping(value = "/tipoconteudo", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	@ResponseBody
 	public ResponseEntity<?> cadastraTipoConteudo(@RequestBody TipoConteudoDto tipoConteudo) {
 		return tipoConteudoService.cadastraUmTipoConteudo(tipoConteudo);
 	}
 
-	@RequestMapping(value = "/tipoConteudo", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@RequestMapping(value = "/tipoconteudo", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	@ResponseBody
 	public ResponseEntity<?> alterarSubConteudo(@RequestBody TipoConteudoDto tipoConteudo) {
 		return tipoConteudoService.alteraTipoConteudo(tipoConteudo);
 	}
 
-	@RequestMapping(value = "/tipoConteudo/{id}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@RequestMapping(value = "/tipoconteudo/{id}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	@ResponseBody
 	public ResponseEntity<?> deletarTipoConteudo(@PathVariable(required = true) String id) {
 		return tipoConteudoService.deletaTipoConteudo(id);
 	}
 
-	@RequestMapping(value = "/tipoConteudo", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@RequestMapping(value = "/tipoconteudo", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	@ResponseBody
 	public ResponseEntity<?> deletarTipoConteudos() {
 		return tipoConteudoService.deletaTipoConteudos();

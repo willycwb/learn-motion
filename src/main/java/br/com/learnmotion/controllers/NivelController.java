@@ -15,7 +15,7 @@ import br.com.learnmotion.models.dtos.NivelDto;
 import br.com.learnmotion.services.NivelService;
 
 @RestController
-@RequestMapping("/app/v1/util")
+@RequestMapping("/app/v1/nivel")
 public class NivelController {
 
 	@Autowired
