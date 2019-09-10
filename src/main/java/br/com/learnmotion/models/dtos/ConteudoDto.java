@@ -1,17 +1,14 @@
 package br.com.learnmotion.models.dtos;
 
-import java.util.Set;
-
-import br.com.learnmotion.models.Nivel;
-import br.com.learnmotion.models.SubConteudo;
+import java.util.List;
 
 public class ConteudoDto {
-	
+
 	private Long id;
-	
-	private Nivel nivel;
-	
-	private Set<SubConteudo> conteudos;
+
+	private NivelDto nivel;
+
+	private List<SubConteudoDto> conteudos;
 
 	public Long getId() {
 		return id;
@@ -21,22 +18,20 @@ public class ConteudoDto {
 		this.id = id;
 	}
 
-	public Nivel getNivel() {
+	public NivelDto getNivel() {
 		return nivel;
 	}
 
-	public void setNivel(Nivel nivel) {
+	public void setNivel(NivelDto nivel) {
 		this.nivel = nivel;
 	}
 
-	public Set<SubConteudo> getConteudos() {
+	public List<SubConteudoDto> getConteudos() {
 		return conteudos;
 	}
 
-	public void setConteudos(Set<SubConteudo> conteudos) {
+	public void setConteudos(List<SubConteudoDto> conteudos) {
 		this.conteudos = conteudos;
 	}
-	
-	
 
 }

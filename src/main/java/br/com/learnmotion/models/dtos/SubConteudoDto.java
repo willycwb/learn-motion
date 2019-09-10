@@ -1,21 +1,19 @@
 package br.com.learnmotion.models.dtos;
 
-import br.com.learnmotion.models.TipoConteudo;
-
 public class SubConteudoDto {
-	
+
 	private Long id;
-	
-	private TipoConteudo sub_conteudo;
-	
+
+	private TipoConteudoDto tipoConteudo;
+
 	private String valorStringMaior;
-	
+
 	private String valorStringMedio;
-	
+
 	private String valorStringMenor;
-	
+
 	private byte[] valorBlobImagem;
-	
+
 	private byte[] valorBlobExemplo;
 
 	public Long getId() {
@@ -26,12 +24,12 @@ public class SubConteudoDto {
 		this.id = id;
 	}
 
-	public TipoConteudo getSub_conteudo() {
-		return sub_conteudo;
+	public TipoConteudoDto getTipoConteudo() {
+		return tipoConteudo;
 	}
 
-	public void setSub_conteudo(TipoConteudo sub_conteudo) {
-		this.sub_conteudo = sub_conteudo;
+	public void setTipoConteudo(TipoConteudoDto tipoConteudo) {
+		this.tipoConteudo = tipoConteudo;
 	}
 
 	public String getValorStringMaior() {
@@ -73,7 +71,5 @@ public class SubConteudoDto {
 	public void setValorBlobExemplo(byte[] valorBlobExemplo) {
 		this.valorBlobExemplo = valorBlobExemplo;
 	}
-	
-	
 
 }

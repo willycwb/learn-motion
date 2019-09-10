@@ -1,6 +1,5 @@
 package br.com.learnmotion.models;
 
-import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -37,7 +36,7 @@ public class Conteudo extends Parent {
 	@ManyToMany
 	@JoinTable(name = "CONTEUDO_SUB_CONTEUDO", joinColumns = {
 			@JoinColumn(name = "ID_CONTEUDO") }, inverseJoinColumns = { @JoinColumn(name = "ID_SUB_CONTEUDO") })
-	private Set<SubConteudo> subConteudos = new HashSet<>();
+	private Set<SubConteudo> subConteudos;
 
 	public Long getId() {
 		return id;

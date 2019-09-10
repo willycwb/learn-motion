@@ -1,7 +1,9 @@
 package br.com.learnmotion.services;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeSet;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import br.com.learnmotion.models.Conteudo;
 import br.com.learnmotion.models.Nivel;
+import br.com.learnmotion.models.SubConteudo;
 import br.com.learnmotion.models.dtos.ConteudoDto;
 import br.com.learnmotion.repositories.ConteudoRepository;
 
@@ -43,10 +46,13 @@ public class ConteudoService extends ParentService {
 	private Conteudo cadastrarConteudo(ConteudoDto conteudoDto) {
 		Conteudo conteudo = new Conteudo();
 		Nivel nivel = nivelService.buscaNivel(conteudoDto.getNivel().getId());
-		// SubConteudo subConteudo =
-		// subConteudoService.searchSubConteudo(conteudoDto.getConteudos());
 		conteudo.setNivel(nivel);
-		// conteudo.setSubConteudos(subConteudo);
+		List<SubConteudo> listaSub = new ArrayList<>();
+		conteudoDto.getConteudos().stream().forEach(sub -> {
+			SubConteudo subConteudo = mapper.map(sub, SubConteudo.class);
+			listaSub.add(subConteudo);
+		});
+		conteudo.setSubConteudos(new TreeSet<SubConteudo>(listaSub));
 		conteudo = conteudoRepository.save(conteudo);
 		return conteudo;
 	}
