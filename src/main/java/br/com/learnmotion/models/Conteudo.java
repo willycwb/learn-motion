@@ -23,7 +23,6 @@ import lombok.Data;
 public class Conteudo extends Parent {
 
 	@Id
-	@NotNull
 	@Column(name = "ID_CONTEUDO")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;

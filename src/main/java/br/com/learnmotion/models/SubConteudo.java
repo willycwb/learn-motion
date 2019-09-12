@@ -18,7 +18,6 @@ import javax.validation.constraints.Size;
 public class SubConteudo extends Parent {
 
 	@Id
-	@NotNull
 	@Column(name = "ID_SUB_CONTEUDO")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;

@@ -21,7 +21,6 @@ import javax.validation.constraints.NotNull;
 public class Nivel extends Parent {
 
 	@Id
-	@NotNull
 	@Column(name = "ID_NIVEL")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
