@@ -79,7 +79,7 @@ public class TipoConteudoService extends ParentService {
 	public ResponseEntity<?> buscaUmTipoConteudo(String id) {
 		TipoConteudo tipoConteudo = buscaTipoConteudo(Long.valueOf(id));
 
-		if (tipoConteudo != null) {
+		if (tipoConteudo == null) {
 			return ResponseEntity.noContent().build();
 		}
 

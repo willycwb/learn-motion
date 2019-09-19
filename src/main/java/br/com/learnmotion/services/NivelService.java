@@ -88,10 +88,10 @@ public class NivelService extends ParentService {
 
 	}
 
-	public ResponseEntity<?> buscaUmNivel(Long id) {
-		Nivel nivel = findNivel(id);
+	public ResponseEntity<?> buscaUmNivel(String id) {
+		Nivel nivel = buscaNivel(Long.valueOf(id));
 
-		if (nivel != null) {
+		if (nivel == null) {
 			return ResponseEntity.noContent().build();
 		}
 

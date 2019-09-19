@@ -79,7 +79,7 @@ public class TipoNivelService extends ParentService {
 	public ResponseEntity<?> buscaUmTipoNivel(String id) {
 		TipoNivel tipoNivel = findNivel(Long.valueOf(id));
 
-		if (tipoNivel != null) {
+		if (tipoNivel == null) {
 			return ResponseEntity.noContent().build();
 		}
 

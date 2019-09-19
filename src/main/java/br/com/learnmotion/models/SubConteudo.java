@@ -22,7 +22,6 @@ public class SubConteudo extends Parent {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@NotNull
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "ID_TIPO_CONTEUDO")
 	private TipoConteudo tipoConteudo;

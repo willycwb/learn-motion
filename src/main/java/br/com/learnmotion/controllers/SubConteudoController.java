@@ -21,37 +21,37 @@ public class SubConteudoController {
 	@Autowired
 	private SubConteudoService subConteudoService;
 
-	@RequestMapping(value = "/subConteudo", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@RequestMapping(value = "/subconteudo", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	@ResponseBody
 	public ResponseEntity<?> buscaSubConteudos() {
 		return subConteudoService.buscaTodosSubConteudos();
 	}
 
-	@RequestMapping(value = "/subConteudo/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@RequestMapping(value = "/subconteudo/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	@ResponseBody
-	public ResponseEntity<?> buscaSubConteudo(@RequestParam(required = true) Long id) {
+	public ResponseEntity<?> buscaSubConteudo(@PathVariable(required = true) String id) {
 		return subConteudoService.buscaUmSubConteudo(id);
 	}
 
-	@RequestMapping(value = "/subConteudo", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@RequestMapping(value = "/subconteudo", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	@ResponseBody
 	public ResponseEntity<?> cadastraSubConteudo(@RequestBody SubConteudoDto subConteudo) {
 		return subConteudoService.cadastraUmSubConteudo(subConteudo);
 	}
 
-	@RequestMapping(value = "/subConteudo", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@RequestMapping(value = "/subconteudo", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	@ResponseBody
 	public ResponseEntity<?> alterarSubConteudo(@RequestBody SubConteudoDto subConteudo) {
 		return subConteudoService.alteraSubConteudo(subConteudo);
 	}
 
-	@RequestMapping(value = "/subConteudo/{id}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@RequestMapping(value = "/subconteudo/{id}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	@ResponseBody
 	public ResponseEntity<?> deletarSubConteudo(@PathVariable(required = true) String id) {
 		return subConteudoService.deletaSubConteudo(id);
 	}
 
-	@RequestMapping(value = "/subConteudo", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@RequestMapping(value = "/subconteudo", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	@ResponseBody
 	public ResponseEntity<?> deletarSubConteudos() {
 		return subConteudoService.deletaSubConteudos();

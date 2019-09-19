@@ -95,10 +95,10 @@ public class ConteudoService extends ParentService {
 
 	}
 
-	public ResponseEntity<?> buscaUmConteudo(Long id) {
-		Conteudo conteudo = findConteudo(id);
+	public ResponseEntity<?> buscaUmConteudo(String id) {
+		Conteudo conteudo = buscaConteudo(Long.valueOf(id));
 
-		if (conteudo != null) {
+		if (conteudo == null) {
 			return ResponseEntity.noContent().build();
 		}
 

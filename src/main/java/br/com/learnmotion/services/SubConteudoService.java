@@ -90,10 +90,10 @@ public class SubConteudoService extends ParentService {
 
 	}
 
-	public ResponseEntity<?> buscaUmSubConteudo(Long id) {
-		SubConteudo subConteudo = findSubConteudo(id);
+	public ResponseEntity<?> buscaUmSubConteudo(String id) {
+		SubConteudo subConteudo = buscaSubConteudo(Long.valueOf(id));
 
-		if (subConteudo != null) {
+		if (subConteudo == null) {
 			return ResponseEntity.noContent().build();
 		}
 

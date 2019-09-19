@@ -29,7 +29,7 @@ public class UtilController {
 
 	@RequestMapping(value = "/nivel/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	@ResponseBody
-	public ResponseEntity<?> buscaPessoa(@RequestParam(required = true) Long id) {
+	public ResponseEntity<?> buscaPessoa(@PathVariable(required = true) String id) {
 		return nivelService.buscaUmNivel(id);
 	}
 

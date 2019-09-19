@@ -29,7 +29,7 @@ public class ConteudoController {
 
 	@RequestMapping(value = "/conteudo/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	@ResponseBody
-	public ResponseEntity<?> buscaConteudo(@RequestParam(required = true) Long id) {
+	public ResponseEntity<?> buscaConteudo(@PathVariable(required = true) String id) {
 		return conteudoService.buscaUmConteudo(id);
 	}
 
