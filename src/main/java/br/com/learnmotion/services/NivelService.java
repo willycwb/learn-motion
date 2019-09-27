@@ -10,9 +10,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import br.com.learnmotion.common.constants.Constants;
+import br.com.learnmotion.common.enums.Status;
 import br.com.learnmotion.models.Nivel;
 import br.com.learnmotion.models.TipoNivel;
 import br.com.learnmotion.models.dtos.NivelDto;
+import br.com.learnmotion.models.dtos.ResponseDto;
 import br.com.learnmotion.repositories.NivelRepository;
 
 @Service
@@ -20,7 +23,7 @@ public class NivelService extends ParentService {
 
 	@Autowired
 	private NivelRepository nivelRepository;
-	
+
 	@Autowired
 	private TipoNivelService tipoNivelService;
 
@@ -31,7 +34,7 @@ public class NivelService extends ParentService {
 	private Nivel findNivel(Long id) {
 		return nivelRepository.findById(id).get();
 	}
-	
+
 	public Nivel buscaNivel(Long id) {
 		return findNivel(id);
 	}
@@ -65,7 +68,7 @@ public class NivelService extends ParentService {
 	@Transactional
 	private Nivel deletarNivel(Long id) {
 		Nivel nivel = findNivel(id);
-		nivelRepository.delete(nivel);		
+		nivelRepository.delete(nivel);
 		return nivel;
 	}
 
@@ -95,7 +98,7 @@ public class NivelService extends ParentService {
 			return ResponseEntity.noContent().build();
 		}
 
-		NivelDto nivelDto = mapper.map(nivel,NivelDto.class);
+		NivelDto nivelDto = mapper.map(nivel, NivelDto.class);
 
 		return ResponseEntity.ok(Map.of("result", nivelDto));
 	}
@@ -103,31 +106,38 @@ public class NivelService extends ParentService {
 	public ResponseEntity<?> cadastraUmNivel(NivelDto nivelDto) {
 		Nivel nivel = cadastrarNivel(nivelDto);
 		NivelDto nivelResponse = mapper.map(nivel, NivelDto.class);
-		return ResponseEntity.ok(Map.of("result", nivelResponse));
+		ResponseDto response = new ResponseDto();
+		response.setResult(nivelResponse);
+		response.setMsg(Constants.CADASTRADO_SUCESSO);
+		response.setStatus(Status.SUCESSO);
+		return ResponseEntity.ok(response);
 	}
-	
-    public ResponseEntity<?> alteraNivel(NivelDto nivelDto){
+
+	public ResponseEntity<?> alteraNivel(NivelDto nivelDto) {
 		Nivel nivel = alterarNivel(nivelDto);
-		NivelDto nivelResponse = mapper.map(nivel, NivelDto.class);	
-    	return ResponseEntity.ok(Map.of("result", nivelResponse));
+		NivelDto nivelResponse = mapper.map(nivel, NivelDto.class);
+		ResponseDto response = new ResponseDto();
+		response.setResult(nivelResponse);
+		response.setMsg(Constants.ALTERADO_SUCESSO);
+		response.setStatus(Status.SUCESSO);
+		return ResponseEntity.ok(response);
 	}
-    
-    public ResponseEntity<?> deletaNivel(String id){
-    	Nivel nivel = deletarNivel(Long.valueOf(id));
-    	
-    	if(nivel == null) {
-    		return ResponseEntity.noContent().build();
-    	}
-    	
-    	NivelDto nivelDto = mapper.map(nivel, NivelDto.class);
-    	
-    	return ResponseEntity.ok(Map.of("result", nivelDto));
-    	
-    }
-    
-    public ResponseEntity<?> deletaNiveis(){
-    	deletarNiveis();
-    	return null;
-    }
+
+	public ResponseEntity<?> deletaNivel(String id) {
+		deletarNivel(Long.valueOf(id));
+		ResponseDto response = new ResponseDto();
+		response.setMsg(Constants.DELETADO_SUCESSO);
+		response.setStatus(Status.SUCESSO);
+		return ResponseEntity.ok(response);
+
+	}
+
+	public ResponseEntity<?> deletaNiveis() {
+		deletarNiveis();
+		ResponseDto response = new ResponseDto();
+		response.setMsg(Constants.DELETADO_SUCESSO);
+		response.setStatus(Status.SUCESSO);
+		return ResponseEntity.ok(response);
+	}
 
 }

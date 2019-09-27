@@ -12,11 +12,14 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import br.com.learnmotion.common.enums.Status;
 import br.com.learnmotion.models.Conteudo;
 import br.com.learnmotion.models.Nivel;
 import br.com.learnmotion.models.SubConteudo;
 import br.com.learnmotion.models.dtos.ConteudoDto;
+import br.com.learnmotion.models.dtos.ResponseDto;
 import br.com.learnmotion.repositories.ConteudoRepository;
+import br.com.learnmotion.common.constants.Constants;
 
 @Service
 public class ConteudoService extends ParentService {
@@ -27,6 +30,8 @@ public class ConteudoService extends ParentService {
 	@Autowired
 	private NivelService nivelService;
 	
+//	public static Constants consntants;
+
 	private List<Conteudo> findConteudos() {
 		return conteudoRepository.findAll();
 	}
@@ -70,10 +75,9 @@ public class ConteudoService extends ParentService {
 	}
 
 	@Transactional
-	private Conteudo deletarConteudo(Long id) {
+	private void deletarConteudo(Long id) {
 		Conteudo conteudo = findConteudo(id);
 		conteudoRepository.delete(conteudo);
-		return conteudo;
 	}
 
 	@Transactional
@@ -110,31 +114,38 @@ public class ConteudoService extends ParentService {
 	public ResponseEntity<?> cadastraUmConteudo(ConteudoDto conteudoDto) {
 		Conteudo conteudo = cadastrarConteudo(conteudoDto);
 		ConteudoDto conteudoResponse = mapper.map(conteudo, ConteudoDto.class);
-		return ResponseEntity.ok(Map.of("result", conteudoResponse));
+		ResponseDto response = new ResponseDto();
+		response.setResult(conteudoResponse);
+		response.setMsg(Constants.CADASTRADO_SUCESSO);
+		response.setStatus(Status.SUCESSO);
+		return ResponseEntity.ok(response);
 	}
 
 	public ResponseEntity<?> alteraConteudo(ConteudoDto conteudoDto) {
 		Conteudo conteudo = alterarConteudo(conteudoDto);
 		ConteudoDto conteudoResponse = mapper.map(conteudo, ConteudoDto.class);
-		return ResponseEntity.ok(Map.of("result", conteudoResponse));
+		ResponseDto response = new ResponseDto();
+		response.setResult(conteudoResponse);
+		response.setMsg(Constants.ALTERADO_SUCESSO);
+		response.setStatus(Status.SUCESSO);
+		return ResponseEntity.ok(response);
 	}
 
 	public ResponseEntity<?> deletaConteudo(String id) {
-		Conteudo conteudo = deletarConteudo(Long.valueOf(id));
-
-		if (conteudo == null) {
-			return ResponseEntity.noContent().build();
-		}
-
-		ConteudoDto conteudoDto = mapper.map(conteudo, ConteudoDto.class);
-
-		return ResponseEntity.ok(Map.of("result", conteudoDto));
+		deletarConteudo(Long.valueOf(id));
+		ResponseDto response = new ResponseDto();
+		response.setMsg(Constants.DELETADO_SUCESSO);
+		response.setStatus(Status.SUCESSO);
+		return ResponseEntity.ok(response);
 
 	}
 
 	public ResponseEntity<?> deletaConteudos() {
 		deletarConteudos();
-		return null;
+		ResponseDto response = new ResponseDto();
+		response.setMsg(Constants.DELETADO_SUCESSO);
+		response.setStatus(Status.SUCESSO);
+		return ResponseEntity.ok(response);
 	}
 
 }

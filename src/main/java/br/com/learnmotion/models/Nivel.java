@@ -43,7 +43,7 @@ public class Nivel extends Parent {
 	private String descricao;
 
 	@Lob
-	@NotNull
+	//@NotNull
 	@Column(name = "BACKGROUD", columnDefinition = "BLOB")
 	private byte[] backgroud;
 

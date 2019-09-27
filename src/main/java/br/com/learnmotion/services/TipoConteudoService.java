@@ -10,7 +10,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import br.com.learnmotion.common.constants.Constants;
+import br.com.learnmotion.common.enums.Status;
 import br.com.learnmotion.models.TipoConteudo;
+import br.com.learnmotion.models.dtos.ResponseDto;
 import br.com.learnmotion.models.dtos.TipoConteudoDto;
 import br.com.learnmotion.repositories.TipoConteudoRepository;
 
@@ -91,31 +94,38 @@ public class TipoConteudoService extends ParentService {
 	public ResponseEntity<?> cadastraUmTipoConteudo(TipoConteudoDto tipoConteudoDto) {
 		TipoConteudo tipoConteudo = cadastrarTipoConteudo(tipoConteudoDto);
 		TipoConteudoDto TipoConteudoResponse = mapper.map(tipoConteudo, TipoConteudoDto.class);
-		return ResponseEntity.ok(Map.of("result", TipoConteudoResponse));
+		ResponseDto response = new ResponseDto();
+		response.setResult(TipoConteudoResponse);
+		response.setMsg(Constants.CADASTRADO_SUCESSO);
+		response.setStatus(Status.SUCESSO);
+		return ResponseEntity.ok(response);
 	}
 
 	public ResponseEntity<?> alteraTipoConteudo(TipoConteudoDto tipoConteudoDto) {
 		TipoConteudo tipoConteudo = alterarTipoConteudo(tipoConteudoDto);
 		TipoConteudoDto TipoConteudoResponse = mapper.map(tipoConteudo, TipoConteudoDto.class);
-		return ResponseEntity.ok(Map.of("result", TipoConteudoResponse));
+		ResponseDto response = new ResponseDto();
+		response.setResult(TipoConteudoResponse);
+		response.setMsg(Constants.ALTERADO_SUCESSO);
+		response.setStatus(Status.SUCESSO);
+		return ResponseEntity.ok(response);
 	}
 
 	public ResponseEntity<?> deletaTipoConteudo(String id) {
-		TipoConteudo tipoConteudo = deletarTipoConteudo(Long.valueOf(id));
-
-		if (tipoConteudo == null) {
-			return ResponseEntity.noContent().build();
-		}
-
-		TipoConteudoDto tipoConteudoDto = mapper.map(tipoConteudo, TipoConteudoDto.class);
-
-		return ResponseEntity.ok(Map.of("result", tipoConteudoDto));
+		deletarTipoConteudo(Long.valueOf(id));
+		ResponseDto response = new ResponseDto();
+		response.setMsg(Constants.DELETADO_SUCESSO);
+		response.setStatus(Status.SUCESSO);
+		return ResponseEntity.ok(response);
 
 	}
 
 	public ResponseEntity<?> deletaTipoConteudos() {
 		deletarTipoConteudos();
-		return null;
+		ResponseDto response = new ResponseDto();
+		response.setMsg(Constants.DELETADO_SUCESSO);
+		response.setStatus(Status.SUCESSO);
+		return ResponseEntity.ok(response);
 	}
 
 }

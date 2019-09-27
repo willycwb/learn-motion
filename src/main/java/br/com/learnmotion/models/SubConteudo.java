@@ -42,12 +42,12 @@ public class SubConteudo extends Parent {
 	private String valorStringMenor;
 
 	@Lob
-	@NotNull
+	//@NotNull
 	@Column(name = "VALOR_BLOB_IMAGEM", columnDefinition = "BLOB NULL")
 	private byte[] valorBlobImagem;
 
 	@Lob
-	@NotNull
+	//@NotNull
 	@Column(name = "VALOR_BLOB_EXEMPLO", columnDefinition = "BLOB NULL")
 	private byte[] valorBlobExemplo;
 

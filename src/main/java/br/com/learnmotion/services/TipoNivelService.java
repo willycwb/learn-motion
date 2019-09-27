@@ -10,7 +10,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import br.com.learnmotion.common.constants.Constants;
+import br.com.learnmotion.common.enums.Status;
 import br.com.learnmotion.models.TipoNivel;
+import br.com.learnmotion.models.dtos.ResponseDto;
 import br.com.learnmotion.models.dtos.TipoNivelDto;
 import br.com.learnmotion.repositories.TipoNivelRepository;
 
@@ -91,31 +94,38 @@ public class TipoNivelService extends ParentService {
 	public ResponseEntity<?> cadastraUmTipoNivel(TipoNivelDto tipoNivelDto) {
 		TipoNivel tipoNivel = cadastrarTipoNivel(tipoNivelDto);
 		TipoNivelDto nivelTipoResponse = mapper.map(tipoNivel, TipoNivelDto.class);
-		return ResponseEntity.ok(Map.of("result", nivelTipoResponse));
+		ResponseDto response = new ResponseDto();
+		response.setResult(nivelTipoResponse);
+		response.setMsg(Constants.CADASTRADO_SUCESSO);
+		response.setStatus(Status.SUCESSO);
+		return ResponseEntity.ok(response);
 	}
 
 	public ResponseEntity<?> alteraTipoNivel(TipoNivelDto tipoNivelDto) {
 		TipoNivel tipoNivel = alterarTipoNivel(tipoNivelDto);
 		TipoNivelDto nivelTipoResponse = mapper.map(tipoNivel, TipoNivelDto.class);
-		return ResponseEntity.ok(Map.of("result", nivelTipoResponse));
+		ResponseDto response = new ResponseDto();
+		response.setResult(nivelTipoResponse);
+		response.setMsg(Constants.ALTERADO_SUCESSO);
+		response.setStatus(Status.SUCESSO);
+		return ResponseEntity.ok(response);
 	}
 
 	public ResponseEntity<?> deletaTipoNivel(String id) {
-		TipoNivel tipoNivel = deletarTipoNivel(Long.valueOf(id));
-
-		if (tipoNivel == null) {
-			return ResponseEntity.noContent().build();
-		}
-
-		TipoNivelDto tipoNivelDto = mapper.map(tipoNivel, TipoNivelDto.class);
-
-		return ResponseEntity.ok(Map.of("result", tipoNivelDto));
+		deletarTipoNivel(Long.valueOf(id));
+		ResponseDto response = new ResponseDto();
+		response.setMsg(Constants.DELETADO_SUCESSO);
+		response.setStatus(Status.SUCESSO);
+		return ResponseEntity.ok(response);
 
 	}
 
 	public ResponseEntity<?> deletaTiposNiveis() {
 		deletarTipoNiveis();
-		return null;
+		ResponseDto response = new ResponseDto();
+		response.setMsg(Constants.DELETADO_SUCESSO);
+		response.setStatus(Status.SUCESSO);
+		return ResponseEntity.ok(response);
 	}
 
 }

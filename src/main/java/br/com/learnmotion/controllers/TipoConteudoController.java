@@ -30,7 +30,7 @@ public class TipoConteudoController {
 	@RequestMapping(value = "/tipoconteudo/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	@ResponseBody
 	public ResponseEntity<?> buscaTipoConteudo(@PathVariable(required = true) String id) {
-		return tipoConteudoService.buscaUmTipoConteudo(id); // Esse nao deu certo no postman
+		return tipoConteudoService.buscaUmTipoConteudo(id); 
 	}
 
 	@RequestMapping(value = "/tipoconteudo", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)

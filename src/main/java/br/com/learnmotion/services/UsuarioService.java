@@ -10,7 +10,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import br.com.learnmotion.common.constants.Constants;
+import br.com.learnmotion.common.enums.Status;
 import br.com.learnmotion.models.Usuario;
+import br.com.learnmotion.models.dtos.ResponseDto;
 import br.com.learnmotion.models.dtos.UsuarioDto;
 import br.com.learnmotion.repositories.UsuarioRepository;
 
@@ -95,31 +98,38 @@ public class UsuarioService extends ParentService {
 	public ResponseEntity<?> cadastraUmUsuario(UsuarioDto usuarioDto) {
 		Usuario usuario = cadastrarUsuario(usuarioDto);
 		UsuarioDto usuarioResponse = mapper.map(usuario, UsuarioDto.class);
-		return ResponseEntity.ok(Map.of("result", usuarioResponse));
+		ResponseDto response = new ResponseDto();
+		response.setResult(usuarioResponse);
+		response.setMsg(Constants.CADASTRADO_SUCESSO);
+		response.setStatus(Status.SUCESSO);
+		return ResponseEntity.ok(response);
 	}
 
 	public ResponseEntity<?> alteraUsuario(UsuarioDto usuarioDto) {
 		Usuario usuario = alterarUsuario(usuarioDto);
 		UsuarioDto usuarioResponse = mapper.map(usuario, UsuarioDto.class);
-		return ResponseEntity.ok(Map.of("result", usuarioResponse));
+		ResponseDto response = new ResponseDto();
+		response.setResult(usuarioResponse);
+		response.setMsg(Constants.ALTERADO_SUCESSO);
+		response.setStatus(Status.SUCESSO);
+		return ResponseEntity.ok(response);
 	}
 
 	public ResponseEntity<?> deletaUsuario(String id) {
-		Usuario usuario = deletarUsuario(Long.valueOf(id));
-
-		if (usuario == null) {
-			return ResponseEntity.noContent().build();
-		}
-
-		UsuarioDto usuarioDto = mapper.map(usuario, UsuarioDto.class);
-
-		return ResponseEntity.ok(Map.of("result", usuarioDto));
+		deletarUsuario(Long.valueOf(id));
+		ResponseDto response = new ResponseDto();
+		response.setMsg(Constants.DELETADO_SUCESSO);
+		response.setStatus(Status.SUCESSO);
+		return ResponseEntity.ok(response);
 
 	}
 
 	public ResponseEntity<?> deletaUsuarios() {
 		deletarUsuarios();
-		return null;
+		ResponseDto response = new ResponseDto();
+		response.setMsg(Constants.DELETADO_SUCESSO);
+		response.setStatus(Status.SUCESSO);
+		return ResponseEntity.ok(response);
 	}
 
 }

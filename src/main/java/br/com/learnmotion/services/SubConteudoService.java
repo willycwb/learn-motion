@@ -10,8 +10,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import br.com.learnmotion.common.constants.Constants;
+import br.com.learnmotion.common.enums.Status;
 import br.com.learnmotion.models.SubConteudo;
 import br.com.learnmotion.models.TipoConteudo;
+import br.com.learnmotion.models.dtos.ResponseDto;
 import br.com.learnmotion.models.dtos.SubConteudoDto;
 import br.com.learnmotion.repositories.SubConteudoRepository;
 
@@ -105,31 +108,38 @@ public class SubConteudoService extends ParentService {
 	public ResponseEntity<?> cadastraUmSubConteudo(SubConteudoDto subConteudoDto) {
 		SubConteudo subConteudo = cadastrarSubConteudo(subConteudoDto);
 		SubConteudoDto subConteudoResponse = mapper.map(subConteudo, SubConteudoDto.class);
-		return ResponseEntity.ok(Map.of("result", subConteudoResponse));
+		ResponseDto response = new ResponseDto();
+		response.setResult(subConteudoResponse);
+		response.setMsg(Constants.CADASTRADO_SUCESSO);
+		response.setStatus(Status.SUCESSO);
+		return ResponseEntity.ok(response);
 	}
 
 	public ResponseEntity<?> alteraSubConteudo(SubConteudoDto subConteudoDto) {
 		SubConteudo subConteudo = alterarSubConteudo(subConteudoDto);
 		SubConteudoDto subConteudoResponse = mapper.map(subConteudo, SubConteudoDto.class);
-		return ResponseEntity.ok(Map.of("result", subConteudoResponse));
+		ResponseDto response = new ResponseDto();
+		response.setResult(subConteudoResponse);
+		response.setMsg(Constants.ALTERADO_SUCESSO);
+		response.setStatus(Status.SUCESSO);
+		return ResponseEntity.ok(response);
 	}
 
 	public ResponseEntity<?> deletaSubConteudo(String id) {
-		SubConteudo subConteudo = deletarSubConteudo(Long.valueOf(id));
-
-		if (subConteudo == null) {
-			return ResponseEntity.noContent().build();
-		}
-
-		SubConteudoDto subConteudoDto = mapper.map(subConteudo, SubConteudoDto.class);
-
-		return ResponseEntity.ok(Map.of("result", subConteudoDto));
+		deletarSubConteudo(Long.valueOf(id));
+		ResponseDto response = new ResponseDto();
+		response.setMsg(Constants.DELETADO_SUCESSO);
+		response.setStatus(Status.SUCESSO);
+		return ResponseEntity.ok(response);
 
 	}
 
 	public ResponseEntity<?> deletaSubConteudos() {
 		deletarSubConteudos();
-		return null;
+		ResponseDto response = new ResponseDto();
+		response.setMsg(Constants.DELETADO_SUCESSO);
+		response.setStatus(Status.SUCESSO);
+		return ResponseEntity.ok(response);
 	}
 
 }

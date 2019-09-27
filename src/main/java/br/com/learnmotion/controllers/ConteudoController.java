@@ -48,7 +48,7 @@ public class ConteudoController {
 	@RequestMapping(value = "/conteudo/{id}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	@ResponseBody
 	public ResponseEntity<?> deletarConteudo(@PathVariable(required = true) String id) {
-		return conteudoService.deletaConteudo(id);
+		return conteudoService.deletaConteudo(id); // dar uma olhada no postman
 	}
 
 	@RequestMapping(value = "/conteudo", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)

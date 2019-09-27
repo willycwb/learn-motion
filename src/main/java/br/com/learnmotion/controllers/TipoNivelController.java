@@ -30,7 +30,7 @@ public class TipoNivelController {
 	@RequestMapping(value = "/tiponivel/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	@ResponseBody
 	public ResponseEntity<?> buscaTipoNivel(@PathVariable(required = true) String id) {
-		return tipoNivelService.buscaUmTipoNivel(id);// Esse nao deu certo
+		return tipoNivelService.buscaUmTipoNivel(id);
 	}
 
 	@RequestMapping(value = "/tiponivel", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
