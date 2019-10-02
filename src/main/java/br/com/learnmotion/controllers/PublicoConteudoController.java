@@ -14,8 +14,8 @@ import br.com.learnmotion.models.dtos.ConteudoDto;
 import br.com.learnmotion.services.ConteudoService;
 
 @RestController
-@RequestMapping("/app/v1/conteudo")
-public class ConteudoController {
+@RequestMapping("/app/v1/publico-conteudo")
+public class PublicoConteudoController {
 
 	@Autowired
 	private ConteudoService conteudoService;
