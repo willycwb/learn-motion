@@ -86,9 +86,11 @@ public class NivelService extends ParentService {
 
 		List<NivelDto> nivelDto = niveis.stream().map(item -> mapper.map(item, NivelDto.class))
 				.collect(Collectors.toList());
-
-		return ResponseEntity.ok(Map.of("result", nivelDto));
-
+		
+		ResponseDto response = new ResponseDto();
+		response.setResult(nivelDto);
+		response.setStatus(Status.SUCESSO);
+		return ResponseEntity.ok(response);
 	}
 
 	public ResponseEntity<?> buscaUmNivel(String id) {
