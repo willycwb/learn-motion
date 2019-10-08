@@ -1,7 +1,6 @@
 package br.com.learnmotion.services;
 
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -75,7 +74,10 @@ public class TipoNivelService extends ParentService {
 		List<TipoNivelDto> tipoNivelDto = tipoNiveis.stream().map(item -> mapper.map(item, TipoNivelDto.class))
 				.collect(Collectors.toList());
 
-		return ResponseEntity.ok(Map.of("result", tipoNivelDto));
+		ResponseDto response = new ResponseDto();
+		response.setResult(tipoNivelDto);
+		response.setStatus(Status.SUCESSO);
+		return ResponseEntity.ok(response);
 
 	}
 
@@ -88,7 +90,11 @@ public class TipoNivelService extends ParentService {
 
 		TipoNivelDto tipoNivelDto = mapper.map(tipoNivel, TipoNivelDto.class);
 
-		return ResponseEntity.ok(Map.of("result", tipoNivelDto));
+		ResponseDto response = new ResponseDto();
+		response.setResult(tipoNivelDto);
+		response.setStatus(Status.SUCESSO);
+		return ResponseEntity.ok(response);
+
 	}
 
 	public ResponseEntity<?> cadastraUmTipoNivel(TipoNivelDto tipoNivelDto) {

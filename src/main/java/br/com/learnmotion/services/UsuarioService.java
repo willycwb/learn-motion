@@ -1,7 +1,6 @@
 package br.com.learnmotion.services;
 
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -79,7 +78,10 @@ public class UsuarioService extends ParentService {
 		List<UsuarioDto> usuarioDto = usuarios.stream().map(item -> mapper.map(item, UsuarioDto.class))
 				.collect(Collectors.toList());
 
-		return ResponseEntity.ok(Map.of("result", usuarioDto));
+		ResponseDto response = new ResponseDto();
+		response.setResult(usuarioDto);
+		response.setStatus(Status.SUCESSO);
+		return ResponseEntity.ok(response);
 
 	}
 
@@ -92,7 +94,11 @@ public class UsuarioService extends ParentService {
 
 		UsuarioDto usuarioDto = mapper.map(usuarios, UsuarioDto.class);
 
-		return ResponseEntity.ok(Map.of("result", usuarioDto));
+		ResponseDto response = new ResponseDto();
+		response.setResult(usuarioDto);
+		response.setStatus(Status.SUCESSO);
+		return ResponseEntity.ok(response);
+
 	}
 
 	public ResponseEntity<?> cadastraUmUsuario(UsuarioDto usuarioDto) {

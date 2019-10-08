@@ -2,7 +2,6 @@ package br.com.learnmotion.services;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.TreeSet;
 import java.util.stream.Collectors;
 
@@ -12,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import br.com.learnmotion.common.constants.Constants;
 import br.com.learnmotion.common.enums.Status;
 import br.com.learnmotion.models.Conteudo;
 import br.com.learnmotion.models.Nivel;
@@ -19,7 +19,6 @@ import br.com.learnmotion.models.SubConteudo;
 import br.com.learnmotion.models.dtos.ConteudoDto;
 import br.com.learnmotion.models.dtos.ResponseDto;
 import br.com.learnmotion.repositories.ConteudoRepository;
-import br.com.learnmotion.common.constants.Constants;
 
 @Service
 public class ConteudoService extends ParentService {
@@ -29,8 +28,6 @@ public class ConteudoService extends ParentService {
 
 	@Autowired
 	private NivelService nivelService;
-	
-//	public static Constants consntants;
 
 	private List<Conteudo> findConteudos() {
 		return conteudoRepository.findAll();
@@ -95,7 +92,10 @@ public class ConteudoService extends ParentService {
 		List<ConteudoDto> conteudoDto = conteudos.stream().map(item -> mapper.map(item, ConteudoDto.class))
 				.collect(Collectors.toList());
 
-		return ResponseEntity.ok(Map.of("result", conteudoDto));
+		ResponseDto response = new ResponseDto();
+		response.setResult(conteudoDto);
+		response.setStatus(Status.SUCESSO);
+		return ResponseEntity.ok(response);
 
 	}
 
@@ -108,7 +108,11 @@ public class ConteudoService extends ParentService {
 
 		ConteudoDto conteudoDto = mapper.map(conteudo, ConteudoDto.class);
 
-		return ResponseEntity.ok(Map.of("result", conteudoDto));
+		ResponseDto response = new ResponseDto();
+		response.setResult(conteudoDto);
+		response.setStatus(Status.SUCESSO);
+		return ResponseEntity.ok(response);
+
 	}
 
 	public ResponseEntity<?> cadastraUmConteudo(ConteudoDto conteudoDto) {

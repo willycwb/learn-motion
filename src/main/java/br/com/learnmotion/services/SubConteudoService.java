@@ -1,7 +1,6 @@
 package br.com.learnmotion.services;
 
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -89,7 +88,10 @@ public class SubConteudoService extends ParentService {
 		List<SubConteudoDto> subConteudoDto = subConteudos.stream().map(item -> mapper.map(item, SubConteudoDto.class))
 				.collect(Collectors.toList());
 
-		return ResponseEntity.ok(Map.of("result", subConteudoDto));
+		ResponseDto response = new ResponseDto();
+		response.setResult(subConteudoDto);
+		response.setStatus(Status.SUCESSO);
+		return ResponseEntity.ok(response);
 
 	}
 
@@ -102,7 +104,11 @@ public class SubConteudoService extends ParentService {
 
 		SubConteudoDto subConteudoDto = mapper.map(subConteudo, SubConteudoDto.class);
 
-		return ResponseEntity.ok(Map.of("result", subConteudoDto));
+		ResponseDto response = new ResponseDto();
+		response.setResult(subConteudoDto);
+		response.setStatus(Status.SUCESSO);
+		return ResponseEntity.ok(response);
+
 	}
 
 	public ResponseEntity<?> cadastraUmSubConteudo(SubConteudoDto subConteudoDto) {
