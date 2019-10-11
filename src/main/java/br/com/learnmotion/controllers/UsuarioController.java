@@ -29,7 +29,7 @@ public class UsuarioController {
 
 	@RequestMapping(value = "/usuario/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	@ResponseBody
-	public ResponseEntity<?> buscaUsuario(@RequestParam(required = true) Long id) {
+	public ResponseEntity<?> buscaUsuario(@PathVariable(required = true) String id) {
 		return usuarioService.buscaUmUsuario(id);
 	}
 

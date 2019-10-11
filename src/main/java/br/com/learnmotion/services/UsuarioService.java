@@ -85,8 +85,8 @@ public class UsuarioService extends ParentService {
 
 	}
 
-	public ResponseEntity<?> buscaUmUsuario(Long id) {
-		Usuario usuarios = findUsuario(id);
+	public ResponseEntity<?> buscaUmUsuario(String id) {
+		Usuario usuarios = findUsuario(Long.valueOf(id));
 
 		if (usuarios != null) {
 			return ResponseEntity.noContent().build();
